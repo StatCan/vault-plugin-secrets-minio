@@ -1,0 +1,8 @@
+# Defaults
+.DS_Store
+.vscode
+_workspace/
+
+# Plugin
+vault-plugin-secrets-minio
+!cmd/vault-plugin-secrets-minio

@@ -1,0 +1,8 @@
+Dockerfile
+.gitignore
+./vault-plugin-secrets-minio
+test/
+_workspace/
+LICENSE
+Makefile
+README.md
