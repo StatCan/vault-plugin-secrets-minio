@@ -1,0 +1,13 @@
+name: build
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    # Build the application
+    - name: Use Go 1.14
+      uses: cedrickring/golang-action/go1.14@1.5.2
+      env:
+        GO111MODULE: "on"
