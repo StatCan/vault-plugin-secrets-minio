@@ -27,3 +27,10 @@ jobs:
     # Container build
     - run: |
         docker build -f Dockerfile -t ${{ env.REGISTRY_NAME }}.azurecr.io/vault-minio:${{ github.sha }} .
+
+    # Scan image for vulnerabilities
+    - uses: Azure/container-scan@v0
+      with:
+        image-name: ${{ env.REGISTRY_NAME }}.azurecr.io/vault-minio:${{ github.sha }}
+        severity-threshold: CRITICAL
+        run-quality-checks: false
