@@ -99,8 +99,14 @@ func (b *backend) minioAccessKeyRevoke(ctx context.Context, req *logical.Request
 
 	b.Logger().Info("Revoking access key", "accessKeyId", accessKeyId)
 
-	if err = client.RemoveUser(ctx, accessKeyId); err != nil {
-		return nil, err
+	err = client.RemoveUser(ctx, accessKeyId)
+	if err != nil {
+		e, ok := err.(madmin.ErrorResponse)
+		if ok && e.Code != "XMinioAdminNoSuchUser" {
+			return nil, e
+		} else if !ok {
+			return nil, err
+		}
 	}
 
 	return nil, nil
